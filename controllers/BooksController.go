@@ -73,7 +73,9 @@ func UpdateBook(c *gin.Context) {
 		return
 	}
 
-	config.DB.Model(&book).Updates(input)
+	book.Title = input.Title
+	book.Author = input.Author
+	config.DB.Save(input)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
